@@ -101,13 +101,6 @@ public class Tetris extends Application {
         gc.fillRect(0, 0, width, height);
 
 
-//        y += cubeSize;
-//        gc.setFill(Color.RED);
-//        gc.fillRect(x, y, widthOfThis, heightOfThis);
-
-//        if(x < 0 || x > width - cubeSize || y < 0) {
-//            Platform.exit();
-//        }
         if (terrain == null) {
             terrain = new Terrain(cubeX, cubeY, cubeSize, cubeXMax, cubeYMax);
             //terrain.getData();
