@@ -5,8 +5,14 @@ import java.util.ArrayList;
 public class Terrain {
     ArrayList<ArrayList<Boolean>> terr;
     ArrayList<Boolean> temp;
+    String NONE;
+    String RIGHT;
+    String LEFT;
 
     public Terrain(int cubeX, int cubeY, int cubeSize, int cubeXMax, int cubeYMax) {
+        this.NONE = "NONE";
+        this.RIGHT = "RIGHT";
+        this.LEFT = "LEFT";
         this.terr = new ArrayList<ArrayList<Boolean>>();
         for(int i = 0; i < cubeYMax; i++) {
             temp = new ArrayList<Boolean>();
@@ -33,7 +39,7 @@ public class Terrain {
     }
 
     public boolean blockAndTerrainTouches(ArrayList<ArrayList<Integer>> arr, String direction) {
-        if (direction.equals("NONE")) {
+        if (direction.equals(NONE)) {
             for (var a : arr) {
                 int x = a.get(0);
                 int y = a.get(1);
@@ -42,7 +48,7 @@ public class Terrain {
                 }
             }
         }
-        if (direction.equals("RIGHT")) {
+        if (direction.equals(RIGHT)) {
             for (var a : arr) {
                 int x = a.get(0);
                 int y = a.get(1);
@@ -51,7 +57,7 @@ public class Terrain {
                 }
             }
         }
-        if (direction.equals("LEFT")) {
+        if (direction.equals(LEFT)) {
             for (var a : arr) {
                 int x = a.get(0);
                 int y = a.get(1);

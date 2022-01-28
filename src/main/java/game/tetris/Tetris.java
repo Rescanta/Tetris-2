@@ -26,17 +26,13 @@ public class Tetris extends Application {
     static int cubeXMax = width / cubeSize;
     static int cubeYMax = height / cubeSize;
     static boolean stuck = false;
+    static int minRandomValue = 1;
+    static int maxRandomValue = 7;
+    static long timeTick = 1000000000;
 
     static boolean gameOver = false;
     static Random rand = new Random();
     static Dir direction = Dir.NONE;
-//    static OBlock initblock1 = null;
-//    static IBlock initblock2 = null;
-//    static JBlock initblock3 = null;
-//    static LBlock initblock4 = null;
-//    static SBlock initblock5 = null;
-//    static TBlock initblock6 = null;
-    //static ZBlock block = null;
     static InterfaceBlock block;
     static Terrain terrain = null;
 
@@ -63,7 +59,7 @@ public class Tetris extends Application {
                         return;
                     }
 
-                    if (now - lastTick > 1000000000 / speed) {
+                    if (now - lastTick > timeTick / speed) {
                         lastTick = now;
                         tick(gc);
                     }
@@ -116,7 +112,7 @@ public class Tetris extends Application {
             block = null;
         }
         if (block == null) {
-            int randomInt = (int) ((Math.random() * (7 - 1)) + 1);
+            int randomInt = (int) ((Math.random() * (maxRandomValue - minRandomValue)) + minRandomValue);
             switch (randomInt) {
                 case 1 -> block = new OBlock(cubeX, cubeY, cubeSize, cubeXMax, cubeYMax);
                 case 2 -> block = new IBlock(cubeX, cubeY, cubeSize, cubeXMax, cubeYMax);
@@ -126,13 +122,6 @@ public class Tetris extends Application {
                 case 6 -> block = new TBlock(cubeX, cubeY, cubeSize, cubeXMax, cubeYMax);
                 case 7 -> block = new ZBlock(cubeX, cubeY, cubeSize, cubeXMax, cubeYMax);
             }
-            //block = new OBlock(cubeX, cubeY, cubeSize, cubeXMax, cubeYMax);
-            //block = new IBlock(cubeX, cubeY, cubeSize, cubeXMax, cubeYMax);
-            //block = new JBlock(cubeX, cubeY, cubeSize, cubeXMax, cubeYMax);
-//            block = new LBlock(cubeX, cubeY, cubeSize, cubeXMax, cubeYMax);
-            //block = new SBlock(cubeX, cubeY, cubeSize, cubeXMax, cubeYMax);
-            //block = new TBlock(cubeX, cubeY, cubeSize, cubeXMax, cubeYMax);
-            //block = new ZBlock(cubeX, cubeY, cubeSize, cubeXMax, cubeYMax);
 
 
         }
@@ -140,10 +129,10 @@ public class Tetris extends Application {
         stuck = block.moveBlock(direction.toString(), cubeSize, cubeXMax, cubeYMax, terrain);
         gc.setFill(Color.RED);
         var arr = block.getArr();
-        //terrain.setNewCube(5, 0);
+
         terrain.checkIfThereAreFullLines(cubeX, cubeY, cubeSize, cubeXMax, cubeYMax);
         var terr = terrain.getArr();
-        //gc.fillRect(x, y, cubeSize, cubeSize);
+
         for (java.util.ArrayList<Integer> integers : arr) {
             gc.fillRect(integers.get(0) * cubeSize, integers.get(1) * cubeSize, cubeSize, cubeSize);
         }
